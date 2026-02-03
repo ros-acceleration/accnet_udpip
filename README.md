@@ -3,6 +3,7 @@
 <!-- TOC -->
 
 - [AccNet UDP/IP Core for AMD KR260](#accnet-udpip-core-for-amd-kr260)
+    - [Contributions](#contributions)
     - [Introduction](#introduction)
     - [Echo-back test design](#echo-back-test-design)
     - [Complete design for Network Acceleration](#complete-design-for-network-acceleration)
@@ -20,6 +21,10 @@
         - [RTL testing with simulation](#rtl-testing-with-simulation)
 
 <!-- /TOC -->
+
+## Contributions
+
+Contributions are welcome. The project is maintained by [Accelerat](https://accelerat.eu/) and AMD. If you want to contribute, please follow [contribution](/CONTRIBUTING.md) guidelines.
 
 ## Introduction
 
