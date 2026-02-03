@@ -1,0 +1,19 @@
+* Accelerat AccNet UDP-IP Core
+
+Required properties:
+- compatible: Should be "accelerat,udp-core"
+- reg: Address and length of the "core" register set.
+- interrupts: List of interrupt(s) configured in the design
+
+Optional properties:
+- mac-address: MAC address of the interface
+
+Examples:
+
+	udp_core_0: ethernet@a0000000 {
+		compatible = "accelerat,udp-core";
+		reg = <0xa0000000 0x1000000>;
+		interrupt-parent = <&gic>;
+		interrupts = <0x0 0x59 0x1>, <0x0 0x5a 0x1>, <0x0 0x5b 0x1>,
+			     <0x0 0x5c 0x1>;
+	};

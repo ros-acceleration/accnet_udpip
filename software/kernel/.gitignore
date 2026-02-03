@@ -1,0 +1,24 @@
+# Ignore vscode settings
+.vscode/settings.json
+
+# Ignore compilation products
+*.cmd
+*.d
+*.mod
+*.mod.c
+*.o
+*.ko
+*.symvers
+*.order
+
+# Ignore compilation products in example/userspace folders
+userspace/main
+userspace/libsock.so
+example/rawrecv
+example/rawsend
+example/recv
+example/send
+
+# Ignore compilation products in benchmark folder
+benchmark/benchmark
+benchmark/user

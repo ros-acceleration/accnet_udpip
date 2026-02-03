@@ -1,0 +1,9 @@
+*
+!.gitignore
+!Makefile
+!pfm.tcl
+!udp_ip_core.dtsi
+!output_overlay/
+!output_overlay/udp_ip_core
+!output_overlay/udp_ip_core/shell.json
+!output_overlay/udp_ip_core/udp_ip_core.dtbo
