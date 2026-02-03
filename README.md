@@ -8,10 +8,10 @@
     - [Complete design for Network Acceleration](#complete-design-for-network-acceleration)
         - [Getting Started](#getting-started)
         - [Linux kernel driver](#linux-kernel-driver)
+        - [Integration with middlewares](#integration-with-middlewares)
     - [Start with development](#start-with-development)
         - [Synthetize your own bitstream](#synthetize-your-own-bitstream)
         - [Integrate IP in your design](#integrate-ip-in-your-design)
-    - [Integration with DDS middleware](#....) # TODO
     - [Internals](#internals)
         - [Overview](#overview)
         - [Design](#design)
@@ -170,6 +170,10 @@ $ sudo ip addr add 192.168.1.20 dev <if-name>
 ### Linux kernel driver
 
 On Ubuntu, load the Linux kernel loadable module driver or use the user-space driver for a quick-and-dirty test. You can find instructions on how to load the kernel module and use the user-space driver directly from the [kernel driver](kernel/README.md) folder.
+
+### Integration with middlewares
+
+AccNet UDP/IP Core can be leverage to offload networking functions required by a middleware (such as DDS). You can find instructions on how to leverage it with your DDS middleware in the [integration](integration/) folder
 
 ## Start with development
 
