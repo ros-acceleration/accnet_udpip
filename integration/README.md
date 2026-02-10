@@ -1,4 +1,4 @@
-# Getting Started with FPGA UDP Offloading
+# Getting Started with FPGA UDP offloading on DDS
 
 ## Build bitstream and userspace driver
 

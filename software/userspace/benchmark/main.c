@@ -1,12 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0+
-
-/* main.c
- *
- * Example usage of userspace driver
- *
- * Copyright (C) Acceleration Robotics S.L.U
- * Copyright (C) Accelerat S.r.l.
- */
+// SPDX-License-Identifier: MIT
 #define _GNU_SOURCE
 
 #include <math.h>

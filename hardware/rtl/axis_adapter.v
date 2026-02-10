@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 /*
 
 Copyright (c) 2014-2023 Alex Forencich

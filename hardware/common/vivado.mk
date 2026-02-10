@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 ###################################################################
 # 
 # Xilinx Vivado FPGA Makefile

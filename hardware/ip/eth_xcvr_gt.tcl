@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # Copyright (c) 2021 Alex Forencich
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy

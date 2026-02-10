@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 /*
  * Userspace socket abstraction for UDP Ethernet Stack in FPGA
  *

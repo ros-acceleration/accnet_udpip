@@ -1,6 +1,8 @@
+# SPDX-License-Identifier: MIT
 """
 
 Copyright (c) 2023 Juan Manuel Reina Muñoz
+Copyright (C) 2026 Advanced Micro Devices, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

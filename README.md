@@ -3,7 +3,7 @@
 <!-- TOC -->
 
 - [AccNet UDP/IP Core for AMD KR260](#accnet-udpip-core-for-amd-kr260)
-    - [Contributions](#contributions)
+    - [Contributions and License](#contributions-and-license)
     - [Introduction](#introduction)
     - [Echo-back test design](#echo-back-test-design)
     - [Complete design for Network Acceleration](#complete-design-for-network-acceleration)
@@ -22,9 +22,10 @@
 
 <!-- /TOC -->
 
-## Contributions
+## Contributions and License
 
 Contributions are welcome. The project is maintained by [Accelerat](https://accelerat.eu/) and AMD. If you want to contribute, please follow [contribution](/CONTRIBUTING.md) guidelines.
+This work is dual-licensed under MIT (with the exception of Linux kernel driver) and GPL 2.0+ (on Linux kernel driver).
 
 ## Introduction
 
