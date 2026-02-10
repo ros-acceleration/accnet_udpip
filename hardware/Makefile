@@ -39,3 +39,7 @@ clean: $(SUBDIRS_CLEAN)
 .PHONY: program
 program:
 	cd $(SUBDIRS) && $(MAKE) program
+
+.PHONY: dtbo
+dtbo:
+	cd $(SUBDIRS) && $(MAKE) dtbo

@@ -88,15 +88,15 @@ Connect the KR260 GEM2 Ethernet port (top left) to a 1G Ethernet NIC in your wor
 On your workstation, assign a static IP in the network 192.168.1.0/24, i.e.:
 
 ```bash
-$ git clone git@github.com:ros-acceleration/acc_net_udp_core.git
+$ git clone git@github.com:ros-acceleration/accnet_udpip.git
 $ sudo ip addr add 192.168.1.20 dev <if-name>
 ```
 
 Clone this repository and change into `1gbe-accel` or `10gbe-accel` folder:
 
 ```bash
-$ cd acc_net_udp_core/10gbe-accel # or
-$ cd acc_net_udp_core/1gbe-accel
+$ cd accnet_udpip/artifacts/kr260/10gbe-accel # or
+$ cd accnet_udpip/artifacts/kr260/1gbe-accel
 ```
 
 If Vivado is not in your `PATH`, remember to source the `settings64.sh` script, which typically resides in the Vitis installation folder, i.e.:
@@ -134,21 +134,21 @@ To reproduce the setup, is suggested to use the official Ubuntu 22.04 LTS versio
 When you are ready, log into to the KR260 board using UART connection (typically available on `/dev/ttyUSB1` with `115200` as baudrate) or via SSH if available. When connected, clone the repository:
 
 ```bash
-$ git clone git@github.com:ros-acceleration/acc_net_udp_core.git
-$ cd acc_net_udp_core/10gbe-accel # or
-$ cd acc_net_udp_core/1gbe-accel
+$ git clone git@github.com:ros-acceleration/accnet_udpip.git
+$ cd accnet_udpip/artifacts/kr260/10gbe-accel # or
+$ cd accnet_udpip/artifacts/kr260/1gbe-accel
 ```
 
 and copy the folder `udp_ip_core` inside `bitstreams` into the pre-defined folder for FPGA-accelerators:
 
 ```bash
-$ cp -r <source-folder>/bitstreams/udp-ip-core /lib/firmware/xilinx/
+$ cp -r <source-folder>/bitstreams/udp_ip_core /lib/firmware/xilinx/
 ```
 
 These files should be now available in `/lib/firmware/xilinx/udp_ip_core`:
 
 ```bash
-$ ls /lib/firmware/xilinx/udp-ip-core
+$ ls /lib/firmware/xilinx/udp_ip_core
 - shell.json            # describes to dfx-manager how the accelerator should be loaded
 - udp_ip_core.bit.bin   # bitstream in xclbin format
 - udp_ip_core.dtbo      # device-tree overlay
@@ -175,7 +175,7 @@ $ sudo ip addr add 192.168.1.20 dev <if-name>
 
 ### Linux kernel driver
 
-On Ubuntu, load the Linux kernel loadable module driver or use the user-space driver for a quick-and-dirty test. You can find instructions on how to load the kernel module and use the user-space driver directly from the [kernel driver](kernel/README.md) folder.
+On Ubuntu, load the Linux kernel loadable module driver or use the user-space driver for a quick-and-dirty test. You can find instructions on how to load the kernel module and use the user-space driver directly from the [software](software/README.md) folder.
 
 ### Integration with middlewares
 
@@ -192,17 +192,17 @@ In case you want to start synthetize a bitstream for a different FPGA model or d
 Clone this repository and its submodules (if you have already cloned it, download submodules only):
 
 ```bash
-$ git clone git@github.com:ros-acceleration/acc_net_udp_core.git
+$ git clone git@github.com:ros-acceleration/accnet_udpip.git
 $ git submodule init
 $ git submodule update
 ```
 
-In the root of the repository the folder `verilog-ethernet` will be populated. `verilog-ethernet` is a collection of Ethernet-related components for gigabit, 10G, and 25G packet processing (8 bit and 64 bit datapaths).  Includes modules for handling Ethernet frames as well as IP, UDP, and ARP and the components for constructing a complete UDP/IP stack.
+The folder `verilog-ethernet` in `hardware/lib/eth` will be populated. `verilog-ethernet` is a collection of Ethernet-related components for Gigabit, 10G, and 25G packet processing (8 bit and 64 bit datapaths).  Includes modules for handling Ethernet frames as well as IP, UDP, and ARP and the components for constructing a complete UDP/IP stack.
 
-To start synthetize your own bitstream, navigate to `src` folder of this example:
+To start synthetize your own bitstream, navigate to `hardware` folder:
 
 ```bash
-$ cd src
+$ cd hardware
 ```
 
 If Vivado is not in your `PATH`, remember to source the `settings64.sh` script, which typically resides in the Vitis installation folder, i.e.:
@@ -211,7 +211,7 @@ If Vivado is not in your `PATH`, remember to source the `settings64.sh` script, 
 $ source /tools/Xilinx/Vitis/<your-version>/settings64.sh
 ```
 
-The `src` folder contains `rtl` folder with setup specific RTL, `lib/eth` which is a symbolic link to common `verilog-ethernet` components library and `fpga` which will contain the Vivado project and generated files (simulation, logs, ..). To start the project generation, synthesis, implementation and bitstream generation:
+The `hardware` folder contains `rtl` folder with setup specific RTL, `lib/eth` which contains `verilog-ethernet` components library and `fpga` which will contain the Vivado project and generated files (simulation, logs, ..). To start the project generation, synthesis, implementation and bitstream generation:
 
 ```bash
 $ make          # 10 GbE project generation, synthesis
@@ -221,7 +221,7 @@ $ make dtbo     # generate the device tree overlay binary
 By default, 10 GbE project is generated and synthetized. If you want to go for 1 GbE:
 
 ```bash
-$ make 1gbe     # 1 GbE project generation, synthesis, ..
+$ make 1g       # 1 GbE project generation, synthesis, ..
 ```
 
 In any cases, the generated bitstream will be located in `fpga/output_overlay` folder, under the name `udp_ip_core.bit.bin`.
@@ -357,15 +357,17 @@ To save up space, RX buffer parameters are stored all together in a 32-bit word 
 ### Source folder structure
 
 ```
-📦 src
+📦 hardware
 ├── 📂 rtl
-│   ├── 📄 fpga.v: Top module of the core.
-│   ├── 📄 fpga_core.v: Instantiation of logics.
+│   ├── 📄 fpga_1g.v: Top module of the core (1G version).
+│   ├── 📄 fpga_10g.v: Top module of the core (10G version).
+│   ├── 📄 fpga_core_xx.v: Instantiation of logics (1G).
+│   ├── 📄 ....v: Core components.
 │   └── 📄 controller.v: PL-PS interoperability (buffers, control registers, ...).
 ├── 📂 fpga
 │   └── Scripts used to generate output files (Vivado project, bitstream, xclbin).
 ├── 📂 ip
-│   └── 📄 zynq_ps.tcl: Generates the block design containing the Zynq PS block.
+│   └── 📄 zynq_ps_xx.tcl: Generates the block design containing the Zynq PS block.
 ├── 📂 tb
 │   └── Testbenches to verify main functionalities, with fpga_core as the DUT.
 └── 📄 Makefile: automates the process of generating the output files.
@@ -397,9 +399,9 @@ Increasing the number of RX buffers has a significant increase on resource utili
 
 ### RTL testing with simulation
 
-The verification is performed with cocotb open source environment. Several tests are provided under `<project-root>/src/tb/fpga_core/test_fpga_core.py` with the purpose of testing UDP-IP core top file.
+The verification is performed with cocotb open source environment. Several tests are provided under `<project-root>/hardware/tb/fpga_core_xx/test_fpga_core.py` with the purpose of testing UDP-IP core top file.
 
-Focusing on top tests (`test_fpga_core.py`), these are based on the following structure:
+Focusing on top tests (`fpga_core_10g/test_fpga_core.py`), these are based on the following structure:
 
 ![Block diagram of TB infrastructure](docs/verification_structure_10gbe.png)
 
@@ -414,7 +416,7 @@ A few examples of the output visualized as waveform are provided below:
 To run tests described in `test_fpga_core.py` (please make sure to install the required dependecies before: python3, cocotb, cocotbext, scapy, icarus, gtkwave):
 
 ```bash
-cd src/tb/fpga_core/
+cd hardware/tb/fpga_core_10g
 make
 gtkwave fpga_core.fst # To visualize waveforms with gtkwave
 ```
